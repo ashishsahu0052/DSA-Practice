@@ -2,19 +2,19 @@ class Solution {
     public int mySqrt(int x) {
         if (x == 0 || x == 1)
             return x;
-        
+
         int low = 1, high = x, ans = 0;
 
         while (low <= high) {
             int mid = low + (high - low) / 2;
-            
+
             // Use long to prevent overflow when squaring mid
             long sq = (long) mid * mid;
 
             if (sq == x)
                 return mid;
             else if (sq < x) {
-                ans = mid;  // mid is a potential answer
+                ans = mid; // mid is a potential answer
                 low = mid + 1;
             } else {
                 high = mid - 1;

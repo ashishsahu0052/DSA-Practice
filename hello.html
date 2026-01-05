@@ -2,32 +2,57 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add & Multiply</title>
+    <title>Real Date & Time</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0f172a;
+        color: #fff;
+      }
+
+      .clock {
+        background: #1e293b;
+        padding: 25px 40px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .time {
+        font-size: 48px;
+        font-weight: bold;
+      }
+
+      .date {
+        font-size: 20px;
+        margin-top: 8px;
+        color: #cbd5f5;
+      }
+    </style>
   </head>
   <body>
-    <h2>Addition and Multiplication</h2>
-
-    <input type="number" id="num1" placeholder="Enter first number" />
-    <input type="number" id="num2" placeholder="Enter second number" />
-
-    <br /><br />
-
-    <button onclick="calculate()">Calculate</button>
-
-    <h3 id="result"></h3>
+    <div class="clock">
+      <div class="time" id="time"></div>
+      <div class="date" id="date"></div>
+    </div>
 
     <script>
-      function calculate() {
-        let num1 = Number(document.getElementById("num1").value);
-        let num2 = Number(document.getElementById("num2").value);
+      function updateClock() {
+        const now = new Date();
 
-        let addition = num1 + num2;
-        let multiplication = num1 * num2;
+        const time = now.toLocaleTimeString();
+        const date = now.toDateString();
 
-        document.getElementById("result").innerHTML =
-          "Addition: " + addition + "<br>Multiplication: " + multiplication;
+        document.getElementById("time").innerText = time;
+        document.getElementById("date").innerText = date;
       }
+
+      updateClock(); // run once immediately
+      setInterval(updateClock, 1000); // update every second
     </script>
   </body>
 </html>
