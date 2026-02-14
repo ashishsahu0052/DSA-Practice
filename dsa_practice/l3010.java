@@ -14,6 +14,6 @@ class Solution {
                 min2 = nums[i];
             }
         }
-        return first + min1 + min2;
+        return first + min1 + min2;l88.java
     }
 }

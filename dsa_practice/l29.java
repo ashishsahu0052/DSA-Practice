@@ -22,7 +22,7 @@ class Solution {
 
             // Double the divisor until it exceeds dividend
             while (dvd >= (temp << 1)) {
-                temp <<= 1;
+               l26 temp <<= 1;
                 multiple <<= 1;
             }
 
