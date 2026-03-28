@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Solution {
+    static int timer;
+    
+    static ArrayList<Integer> articulationPoints(int V, int[][] edges) {
+        
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i = 0; i < V; i++) adj.add(new ArrayList<>());
+        
+        for(int[] e : edges){
+            int u = e[0], v = e[1];
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+        
+        boolean[] visited = new boolean[V];
+        int[] tin = new int[V];
+        int[] low = new int[V];
+        boolean[] isArticulation = new boolean[V];
+        
+        timer = 0;
+        
+        for(int i = 0; i < V; i++){
+            if(!visited[i]){
+                dfs(i, -1, visited, tin, low, adj, isArticulation);
+            }
+        }
+        
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i = 0; i < V; i++){
+            if(isArticulation[i]) res.add(i);
+        }
+        
+        if(res.size() == 0){
+            res.add(-1);
+        }
+        
+        return res;
+    }
+    
+    static void dfs(int node, int parent, boolean[] visited, int[] tin, int[] low,
+                    ArrayList<ArrayList<Integer>> adj, boolean[] isArticulation){
+        
+        visited[node] = true;
+        tin[node] = low[node] = timer++;
+        
+        int child = 0;
+        
+        for(int neigh : adj.get(node)){
+            
+            if(neigh == parent) continue;
+            
+            if(!visited[neigh]){
+                dfs(neigh, node, visited, tin, low, adj, isArticulation);
+                
+                low[node] = Math.min(low[node], low[neigh]);
+                
+                // articulation condition
+                if(low[neigh] >= tin[node] && parent != -1){
+                    isArticulation[node] = true;
+                }
+                
+                child++;
+            } else {
+                low[node] = Math.min(low[node], tin[neigh]);
+            }
+        }
+        
+        // root node case
+        if(parent == -1 && child > 1){
+            isArticulation[node] = true;
+        }
+    }
+}
