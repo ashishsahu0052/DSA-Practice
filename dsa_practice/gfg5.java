@@ -49,6 +49,4 @@ class Solution {
         
         return ways[V - 1];
     }
-}{
-
 }
