@@ -1,6 +1,0 @@
-<!DOCTYPE [
-<!ELEMENT book(titile , author , price)>
-<!ELEMENT title(#PCDATA)>
-<!ELEMENT author(#PCDATA)>
-<!ELEMENT price(#PCDATA)>
-]>
